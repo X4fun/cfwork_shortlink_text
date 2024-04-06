@@ -1,4 +1,4 @@
-const admin_path = '/short_link_admin'
+const admin_path = '/'
 const api_path = '/short_api'
 const url_key = 'orgi_url' // original url key
 const url_name = 'short_code' // short code  key
@@ -142,8 +142,19 @@ const index = `<!doctype html>
                 var url = document.location.protocol + '//' + document.location.host + '/' + resp['${url_name}']
                 document.getElementById('result').innerHTML = url
                 document.getElementById('name').value = resp['${url_name}']
+                // write co clipboard
+                copyToClipboard(url)
             })
         }
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text)
+              .then(() => {
+                console.log('文本已成功复制到剪贴板');
+              })
+              .catch((error) => {
+                console.error('复制文本到剪贴板失败:', error);
+              });
+          }
     </script>
 
 </html>`
